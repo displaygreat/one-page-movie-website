@@ -290,7 +290,7 @@ const movieConstructor = (selector, options) => {
 movieConstructor(".app", {
   title: "The Queen's Gambit",
   background:
-    "linear-gradient(40deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 50%, rgba(255,255,255,0) 100%), url('gambit/background.jpg') top right 20% no-repeat",
+    "linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('gambit/background.jpg') top right 20% no-repeat",
   favicon: "gambit/logo.png",
   fontColor: "#fff",
   backgroundColor: "#141218",
