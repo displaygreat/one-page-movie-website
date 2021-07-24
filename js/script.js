@@ -33,6 +33,7 @@ const createHeader = ({ title, header: { logo, menu, social } }) => {
       const menuLink = getElement("a", ["menu-link"], {
         href: item.link,
         textContent: item.title,
+        target: "_blank",
       });
 
       return menuLink;
@@ -173,7 +174,7 @@ const createMain = ({
       });
 
       if (item.title || item.subtitle) {
-        const cardDescription = getElement("figcaption", ['card-description']);
+        const cardDescription = getElement("figcaption", ["card-description"]);
         cardDescription.innerHTML = `
   				${item.subtitle ? `<p class="card-subtitle">${item.subtitle}</p>` : ""}
   				${item.title ? `<p class="card-title">${item.title}</p>` : ""}
@@ -287,108 +288,85 @@ const movieConstructor = (selector, options) => {
   }
 };
 
-movieConstructor(".app", {
-  title: "The Queen's Gambit",
-  background:
-    "linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('gambit/background.jpg') top right 20% no-repeat",
-  favicon: "gambit/logo.png",
-  fontColor: "#fff",
-  backgroundColor: "#141218",
-  subColor: "#9D2929",
-  header: {
-    logo: "gambit/logo.png",
-    social: [
-      {
-        title: "Twitter",
-        link: "https://twitter.com/NetflixTheQG",
-        image: "gambit/social/twitter.svg",
+getData()
+  .then(([info, images, video, episodes]) => {
+    console.log([info, images, video, episodes]);
+    const movie = {
+      title: info.name,
+      background: `linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('https://image.tmdb.org/t/p/original/${images.backdrops[5].file_path}') top right 20% no-repeat`,
+      favicon: "img/logo.png",
+      fontColor: "#fff",
+      backgroundColor: "#141218",
+      subColor: "#9D2929",
+      header: {
+        logo: `https://image.tmdb.org/t/p/original/${images.logos[2].file_path}`,
+        social: [
+          {
+            title: "Twitter",
+            link: "https://twitter.com/NetflixTheQG",
+            image: "img/social/twitter.svg",
+          },
+          {
+            title: "Instagram",
+            link: "https://www.instagram.com/the.queensgambitnetflix",
+            image: "img/social/instagram.svg",
+          },
+          {
+            title: "facebook",
+            link: "https://www.facebook.com/TheQueensGambitTVSeries",
+            image: "img/social/facebook.svg",
+          },
+        ],
+        menu: [
+          {
+            title: "Description",
+            link: "#",
+          },
+          {
+            title: "Trailer",
+            link: `https://www.youtube.com/watch?v=${video.results[1].key}`,
+          },
+          {
+            title: "Testimonials",
+            link: "#",
+          },
+        ],
       },
-      {
-        title: "Instagram",
-        link: "https://www.instagram.com/the.queensgambitnetflix",
-        image: "gambit/social/instagram.svg",
+      main: {
+        genre: `${info.first_air_date.substr(0, 4)}, ${info.genres[0].name}`,
+        rating: Math.floor(info.vote_average),
+        description: info.overview,
+        trailer: `https://www.youtube.com/watch?v=${video.results[1].key}`,
+        slider: episodes.episodes.map((episode) => {
+          return {
+            img: `https://image.tmdb.org/t/p/original/${episode.still_path}`,
+            title: episode.name,
+            subtitle: `Episode №${episode.episode_number}`,
+          };
+        }),
       },
-      {
-        title: "facebook",
-        link: "https://www.facebook.com/TheQueensGambitTVSeries",
-        image: "gambit/social/facebook.svg",
+      footer: {
+        copyright: `© ${new Date().getFullYear()} ${
+          info.name
+        }. All right reserved.`,
+        menu: [
+          {
+            title: "Privacy Policy",
+            link: "#",
+          },
+          {
+            title: "Terms of Service",
+            link: "#",
+          },
+          {
+            title: "Legal",
+            link: "#",
+          },
+        ],
+        fontColor: "#3a383d",
       },
-    ],
-    menu: [
-      {
-        title: "Description",
-        link: "#",
-      },
-      {
-        title: "Trailer",
-        link: "#",
-      },
-      {
-        title: "Testimonials",
-        link: "#",
-      },
-    ],
-  },
-  main: {
-    genre: "2020, drama",
-    rating: "8",
-    description:
-      "In a 1950s orphanage, a young girl reveals an astonishing talent for chess and begins an unlikely journey to stardom while grappling with addiction.",
-    trailer: "https://www.youtube.com/watch?v=CDrieqwSdgI",
-    slider: [
-      {
-        img: "gambit/episodes/episode-1.jpg",
-        title: "Openings",
-        subtitle: "Episode №1",
-      },
-      {
-        img: "gambit/episodes/episode-2.jpg",
-        title: "Exchanges",
-        subtitle: "Episode №2",
-      },
-      {
-        img: "gambit/episodes/episode-3.jpg",
-        title: "Doubled Pawns",
-        subtitle: "Episode №3",
-      },
-      {
-        img: "gambit/episodes/episode-4.jpg",
-        title: "Middle Game",
-        subtitle: "Episode №4",
-      },
-      {
-        img: "gambit/episodes/episode-5.jpg",
-        title: "Fork",
-        subtitle: "Episode №5",
-      },
-      {
-        img: "gambit/episodes/episode-6.jpg",
-        title: "Adjournment",
-        subtitle: "Episode №6",
-      },
-      {
-        img: "gambit/episodes/episode-7.jpg",
-        title: "End Game",
-        subtitle: "Episode №7",
-      },
-    ],
-  },
-  footer: {
-    copyright: "© 2020 The Queen's Gambit. All right reserved.",
-    menu: [
-      {
-        title: "Privacy Policy",
-        link: "#",
-      },
-      {
-        title: "Terms of Service",
-        link: "#",
-      },
-      {
-        title: "Legal",
-        link: "#",
-      },
-    ],
-    fontColor: "#3a383d",
-  },
-});
+    };
+    console.log(movie);
+    movieConstructor(".app", movie);
+  })
+  .catch((error) => console.log(error.message));
