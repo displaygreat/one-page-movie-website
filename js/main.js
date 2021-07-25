@@ -33,7 +33,6 @@ const createHeader = ({ title, header: { logo, menu, social } }) => {
       const menuLink = getElement("a", ["menu-link"], {
         href: item.link,
         textContent: item.title,
-        target: "_blank",
       });
 
       return menuLink;
@@ -290,7 +289,6 @@ const movieConstructor = (selector, options) => {
 
 getData()
   .then(([info, images, video, episodes]) => {
-    console.log([info, images, video, episodes]);
     const movie = {
       title: info.name,
       background: `linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('https://image.tmdb.org/t/p/original/${images.backdrops[5].file_path}') top right 20% no-repeat`,
@@ -303,31 +301,31 @@ getData()
         social: [
           {
             title: "Twitter",
-            link: "https://twitter.com/NetflixTheQG",
+            link: "https://twitter.com",
             image: "img/social/twitter.svg",
           },
           {
             title: "Instagram",
-            link: "https://www.instagram.com/the.queensgambitnetflix",
+            link: "https://www.instagram.com",
             image: "img/social/instagram.svg",
           },
           {
             title: "facebook",
-            link: "https://www.facebook.com/TheQueensGambitTVSeries",
+            link: "https://www.facebook.com",
             image: "img/social/facebook.svg",
           },
         ],
         menu: [
           {
-            title: "Description",
+            title: "Series Cast",
             link: "#",
           },
           {
-            title: "Trailer",
-            link: `https://www.youtube.com/watch?v=${video.results[1].key}`,
+            title: "Seasons",
+            link: "#",
           },
           {
-            title: "Testimonials",
+            title: "Reviews",
             link: "#",
           },
         ],
@@ -366,7 +364,6 @@ getData()
         fontColor: "#3a383d",
       },
     };
-    console.log(movie);
     movieConstructor(".app", movie);
   })
   .catch((error) => console.log(error.message));
