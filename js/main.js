@@ -248,6 +248,41 @@ const createFooter = ({ footer: { copyright, menu, fontColor } }) => {
   return footer;
 };
 
+const createModalSeriesCast = ({
+  modal: { closeSymbol, seriesCast, castTitle, modalId },
+}) => {
+  const modal = getElement("div", ["modal", "modal-cast"]);
+  modal.setAttribute("id", modalId);
+  const modalDialog = getElement("div", ["modal-dialog"]);
+  modal.append(modalDialog);
+  const closeBtn = getElement("button", ["close-btn"], {
+    textContent: closeSymbol,
+  });
+  const modalTitle = getElement("h2", ["cast-title"], {
+    textContent: castTitle,
+  });
+  const cast = seriesCast.map((actor) => {
+    if (actor.name || actor.character) {
+      const actorInfo = getElement("p", ["actor-info"]);
+      console.log("actorInfo: ", actorInfo);
+      actorInfo.innerHTML = `
+  				${actor.name ? `<span class="actor-name">${actor.name}</span>` : ""}
+  				${
+            actor.character
+              ? `<span class="actor-character">"${actor.character}"</span>`
+              : ""
+          }
+  			`;
+      return actorInfo;
+    }
+  });
+  modalDialog.append(closeBtn);
+  modalDialog.append(modalTitle);
+  modalDialog.append(...cast);
+
+  return modal;
+};
+
 const movieConstructor = (selector, options) => {
   const app = document.querySelector(selector);
   app.classList.add("body-app");
@@ -285,10 +320,14 @@ const movieConstructor = (selector, options) => {
   if (options.footer) {
     app.append(createFooter(options));
   }
+  if (options.modal) {
+    app.append(createModalSeriesCast(options));
+  }
 };
 
 getData()
-  .then(([info, images, video, episodes]) => {
+  .then(([info, images, video, episodes, cast]) => {
+    console.log(cast);
     const movie = {
       title: info.name,
       background: `linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('https://image.tmdb.org/t/p/original/${images.backdrops[5].file_path}') top right 20% no-repeat`,
@@ -318,7 +357,7 @@ getData()
         menu: [
           {
             title: "Series Cast",
-            link: "#",
+            link: "#cast",
           },
           {
             title: "Seasons",
@@ -362,6 +401,19 @@ getData()
           },
         ],
         fontColor: "#3a383d",
+      },
+      modal: {
+        closeSymbol: "\u2715",
+        castTitle: "Series Cast",
+        modalId: "cast",
+        seriesCast: cast.cast
+          .map((actor) => {
+            return {
+              name: actor.name,
+              character: actor.roles[0].character,
+            };
+          })
+          .slice(0, 10),
       },
     };
     movieConstructor(".app", movie);
