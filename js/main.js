@@ -264,7 +264,6 @@ const createModalSeriesCast = ({
   const cast = seriesCast.map((actor) => {
     if (actor.name || actor.character) {
       const actorInfo = getElement("p", ["actor-info"]);
-      console.log("actorInfo: ", actorInfo);
       actorInfo.innerHTML = `
   				${actor.name ? `<span class="actor-name">${actor.name}</span>` : ""}
   				${
@@ -403,9 +402,9 @@ getData()
         fontColor: "#3a383d",
       },
       modal: {
+        modalId: "cast",
         closeSymbol: "\u2715",
         castTitle: "Series Cast",
-        modalId: "cast",
         seriesCast: cast.cast
           .map((actor) => {
             return {
