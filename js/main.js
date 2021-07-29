@@ -326,7 +326,6 @@ const movieConstructor = (selector, options) => {
 
 getData()
   .then(([info, images, video, episodes, cast]) => {
-    console.log(cast);
     const movie = {
       title: info.name,
       background: `linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('https://image.tmdb.org/t/p/original/${images.backdrops[5].file_path}') top right 20% no-repeat`,
