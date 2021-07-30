@@ -34,6 +34,15 @@ body {
             flex-direction: column;
 }
 
+header {
+    height: 55px;
+    left: 0;
+    right: 0;
+    position: fixed;
+    background-color: #141218;
+    z-index: 99;
+}
+
 .container {
     width: 95%;
     max-width: 1140px;
@@ -47,8 +56,7 @@ body {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    padding-top: 60px;
-    margin-bottom: 90px;
+    padding: 15px 0;
     z-index: 99;
 }
 
@@ -85,6 +93,10 @@ body {
 .social-link img {
     display: block;
     width: 100%;
+}
+
+.main-content {
+    margin-top: 200px;
 }
 
 .genre {
@@ -445,7 +457,7 @@ body {
         display: block;
         position: absolute;
         right: 35px;
-        top: 40px;
+        top: 28px;
         width: 30px;
         height: 2px;
         background-color: #fff;
@@ -516,8 +528,9 @@ body {
         right: 0;
         top: 0;
         background-color: var(--sub-color);
-        width: 250px;
-        padding-bottom: 40px;
+        width: 100vw;
+        height: 100vh;
+        padding-top: 140px;
     }
 
     .header-active {
@@ -531,7 +544,7 @@ body {
     }
 
     .menu-list {
-        margin: auto;
+        margin: 60px auto;
         -webkit-box-ordinal-group: 3;
             -ms-flex-order: 2;
                 order: 2;
@@ -549,7 +562,8 @@ body {
 
     .menu-link {
         margin-right: 0;
-        margin-bottom: 17px;
+        margin-bottom: 24px;
+        font-size: 18px;
     }
 
     .social {

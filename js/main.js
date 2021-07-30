@@ -295,7 +295,6 @@ const createModalSeasons = ({
   const modalTitle = getElement("h2", ["seasons-title"], {
     textContent: seasonsTitle,
   });
-  console.log(seasonsList);
   const seasons = seasonsList.map((season) => {
     if (
       season.name ||
@@ -421,7 +420,9 @@ getData()
   .then(([info, images, video, episodes, cast]) => {
     const movie = {
       title: info.name,
-      background: `linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('https://image.tmdb.org/t/p/original/${images.backdrops[5].file_path}') top right 20% no-repeat`,
+      background: window.matchMedia("(max-width: 768px)").matches
+        ? `linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('https://image.tmdb.org/t/p/original/${images.backdrops[5].file_path}') top right 20% no-repeat`
+        : `linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('https://image.tmdb.org/t/p/original/${images.backdrops[5].file_path}') top right no-repeat`,
       favicon: "img/logo.png",
       fontColor: "#fff",
       backgroundColor: "#141218",
