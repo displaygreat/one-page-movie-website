@@ -334,6 +334,41 @@ const createModalSeasons = ({
   return modal;
 };
 
+const createModalPosters = ({
+  modalPosters: { closeSymbol, postersList, postersTitle, modalId },
+}) => {
+  const modal = getElement("div", ["modal", "modal-posters"]);
+  modal.setAttribute("id", modalId);
+  const modalDialog = getElement("div", ["modal-dialog"]);
+  modal.append(modalDialog);
+  const closeBtn = getElement("button", ["close-btn"], {
+    textContent: closeSymbol,
+  });
+  const modalTitle = getElement("h2", ["posters-title"], {
+    textContent: postersTitle,
+  });
+  const postersGallery = getElement("div", ["posters-gallery"]);
+  const posters = postersList.map((poster) => {
+    if (poster.path) {
+      const posterWrapper = getElement("div", ["poster-wrapper"]);
+      posterWrapper.innerHTML = `
+  				${
+            poster.path
+              ? `<img class="poster-image" src="${poster.path}" alt="poster"/>`
+              : ""
+          }
+  			`;
+      return posterWrapper;
+    }
+  });
+  modalDialog.append(closeBtn);
+  modalDialog.append(modalTitle);
+  modalDialog.append(postersGallery);
+  postersGallery.append(...posters);
+
+  return modal;
+};
+
 const movieConstructor = (selector, options) => {
   const app = document.querySelector(selector);
   app.classList.add("body-app");
@@ -377,6 +412,9 @@ const movieConstructor = (selector, options) => {
   if (options.modalSeasons) {
     app.append(createModalSeasons(options));
   }
+  if (options.modalPosters) {
+    app.append(createModalPosters(options));
+  }
 };
 
 getData()
@@ -417,8 +455,8 @@ getData()
             link: "#seasons",
           },
           {
-            title: "Reviews",
-            link: "#",
+            title: "Posters",
+            link: "#posters",
           },
         ],
       },
@@ -480,6 +518,19 @@ getData()
             airDate: season.air_date,
           };
         }),
+      },
+      modalPosters: {
+        modalId: "posters",
+        closeSymbol: "\u2715",
+        postersTitle: "Posters",
+        postersList: images.posters
+          .filter((item) => item.iso_639_1 === "en")
+          .map((poster) => {
+            return {
+              path: `https://image.tmdb.org/t/p/original/${poster.file_path}`,
+            };
+          })
+          .slice(0, 3),
       },
     };
     movieConstructor(".app", movie);

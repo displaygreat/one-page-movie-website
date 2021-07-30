@@ -4,6 +4,9 @@
 * Autoprefixer: v9.7.6
 * Browsers: last 4 version
 */
+* {
+    box-sizing: border-box;
+}
 
 html {
     overflow-x: hidden;
@@ -382,7 +385,7 @@ body {
     opacity: 0.8;
 }
 
-.cast-title, .seasons-title {
+.cast-title, .seasons-title, .posters-title {
     font-size: 24px;
     margin-bottom: 20px;
 }
@@ -401,7 +404,15 @@ body {
 .season-info:not(:last-child) {
     margin-bottom: 40px;
 }
-
+.posters-gallery {
+    display: flex;
+    justify-content: space-between;
+}
+.poster-wrapper {
+    width: 32%;
+    padding: 10px;
+    border: 1px dashed rgba(255, 255, 255, 0.5);
+}
 @media (max-width: 760px) {
     .play {
         display: none;

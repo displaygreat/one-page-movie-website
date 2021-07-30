@@ -9,7 +9,10 @@ const openModal = (e) => {
 };
 
 const closeModal = (e) => {
-  if (e.target.classList.contains("close-btn")) {
+  if (
+    e.target.classList.contains("close-btn") ||
+    (!e.target.closest(".modal-dialog") && e.target.closest(".modal"))
+  ) {
     const target = e.target.closest(".modal");
     const modalName = target.getAttribute("id");
     const targetModal = document.querySelector(`#${modalName}`);
