@@ -331,6 +331,7 @@ body {
     opacity: 0;
     transition: all 0.8s ease 0s;
     z-index: 100;
+    overflow: scroll;
 }
 
 .is-open {
@@ -381,9 +382,24 @@ body {
     opacity: 0.8;
 }
 
-.cast-title {
+.cast-title, .seasons-title {
     font-size: 24px;
     margin-bottom: 20px;
+}
+.season-number, .season-episodes, .season-name {
+    display: block;
+    margin-bottom: 10px;
+}
+.season-name {
+    margin: 20px 0;
+    font-size: 18px;
+}
+.actor-info, .season-info {
+    border: 1px dashed rgba(255, 255, 255, 0.5);
+    padding: 15px;
+}
+.season-info:not(:last-child) {
+    margin-bottom: 40px;
 }
 
 @media (max-width: 760px) {

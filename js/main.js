@@ -249,7 +249,7 @@ const createFooter = ({ footer: { copyright, menu, fontColor } }) => {
 };
 
 const createModalSeriesCast = ({
-  modal: { closeSymbol, seriesCast, castTitle, modalId },
+  modalCast: { closeSymbol, seriesCast, castTitle, modalId },
 }) => {
   const modal = getElement("div", ["modal", "modal-cast"]);
   modal.setAttribute("id", modalId);
@@ -278,6 +278,58 @@ const createModalSeriesCast = ({
   modalDialog.append(closeBtn);
   modalDialog.append(modalTitle);
   modalDialog.append(...cast);
+
+  return modal;
+};
+
+const createModalSeasons = ({
+  modalSeasons: { closeSymbol, seasonsList, seasonsTitle, modalId },
+}) => {
+  const modal = getElement("div", ["modal", "modal-seasons"]);
+  modal.setAttribute("id", modalId);
+  const modalDialog = getElement("div", ["modal-dialog"]);
+  modal.append(modalDialog);
+  const closeBtn = getElement("button", ["close-btn"], {
+    textContent: closeSymbol,
+  });
+  const modalTitle = getElement("h2", ["seasons-title"], {
+    textContent: seasonsTitle,
+  });
+  console.log(seasonsList);
+  const seasons = seasonsList.map((season) => {
+    if (
+      season.name ||
+      season.seasonsNumber ||
+      season.episodeCount ||
+      season.airDate
+    ) {
+      const seasonInfo = getElement("p", ["season-info"]);
+      seasonInfo.innerHTML = `
+  				${
+            season.seasonsNumber
+              ? `<span class="season-number">Season ${season.seasonsNumber}</span>`
+              : ""
+          }
+          ${
+            season.name ? `<span class="season-name">${season.name}</span>` : ""
+          }
+          ${
+            season.episodeCount
+              ? `<span class="season-episodes">${season.episodeCount} episodes</span>`
+              : ""
+          }
+          ${
+            season.airDate
+              ? `<span class="season-date">Season ${season.seasonsNumber} premiered on ${season.airDate}</span>`
+              : ""
+          }
+  			`;
+      return seasonInfo;
+    }
+  });
+  modalDialog.append(closeBtn);
+  modalDialog.append(modalTitle);
+  modalDialog.append(...seasons);
 
   return modal;
 };
@@ -319,8 +371,11 @@ const movieConstructor = (selector, options) => {
   if (options.footer) {
     app.append(createFooter(options));
   }
-  if (options.modal) {
+  if (options.modalCast) {
     app.append(createModalSeriesCast(options));
+  }
+  if (options.modalSeasons) {
+    app.append(createModalSeasons(options));
   }
 };
 
@@ -359,7 +414,7 @@ getData()
           },
           {
             title: "Seasons",
-            link: "#",
+            link: "#seasons",
           },
           {
             title: "Reviews",
@@ -400,7 +455,7 @@ getData()
         ],
         fontColor: "#3a383d",
       },
-      modal: {
+      modalCast: {
         modalId: "cast",
         closeSymbol: "\u2715",
         castTitle: "Series Cast",
@@ -412,6 +467,19 @@ getData()
             };
           })
           .slice(0, 10),
+      },
+      modalSeasons: {
+        modalId: "seasons",
+        closeSymbol: "\u2715",
+        seasonsTitle: "Seasons",
+        seasonsList: info.seasons.map((season) => {
+          return {
+            name: season.name,
+            seasonsNumber: info.seasons.length,
+            episodeCount: season.episode_count,
+            airDate: season.air_date,
+          };
+        }),
       },
     };
     movieConstructor(".app", movie);
