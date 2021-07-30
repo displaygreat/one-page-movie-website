@@ -425,7 +425,7 @@ header {
     padding: 10px;
     border: 1px dashed rgba(255, 255, 255, 0.5);
 }
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     .play {
         display: none;
     }
@@ -447,9 +447,7 @@ header {
     .footer-link:first-child {
         margin-left: 0;
     }
-}
 
-@media (max-width: 540px) {
     .container {
         width: 90%;
     }
