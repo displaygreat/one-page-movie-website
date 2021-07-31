@@ -342,7 +342,6 @@ header {
     position: fixed;
     display: flex;
     justify-content: center;
-    align-items: center;
     top: 0;
     left: 0;
     width: 100vw;
@@ -364,6 +363,7 @@ header {
 .modal-dialog {
     position: relative;
     width: 600px;
+    height: max-content;
     padding: 40px;
     background-color: #1d1817;
     color: #fff;
@@ -597,5 +597,69 @@ header {
 
     .series {
         max-width: 210px;
+    }
+
+    .modal {
+        background-color: #000;
+    }
+
+    .modal-dialog {
+        width: 100%;
+    }
+
+    .actor-info {
+        justify-content: space-between;
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+    }
+
+    .posters-gallery {
+        flex-direction: column;
+    }
+
+    .posters-title {
+        text-align: center;
+    }
+
+    .poster-wrapper {
+        width: 70%;
+        margin: auto;
+    }
+
+    .poster-wrapper:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+    .left {
+        order: 2;
+    }
+
+    .right {
+        order: 1;
+        margin-bottom: 20px;
+    }
+}
+
+@media(max-width: 540px) {
+    .modal, .modal-dialog {
+        padding: 20px;
+    }
+    .actor-info {
+        flex-direction: column;
+    }
+
+    .actor-name {
+        margin-bottom: 10px;
+    }
+
+    .footer-menu {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-link {
+        margin-left: 0;
+        margin-bottom: 10px;
     }
 }
