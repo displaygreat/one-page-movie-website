@@ -12,8 +12,13 @@ const getElement = (tagName, classNames, attributes) => {
   return element;
 };
 
-const createHeader = ({ title, header: { logo, menu, social } }) => {
+const createHeader = ({
+  title,
+  header: { logo, menu, social, background },
+}) => {
   const header = getElement("header");
+  header.classList.add("lock-padding");
+  header.style.backgroundColor = background;
   const container = getElement("div", ["container"]);
   const wrapper = getElement("div", ["header"]);
 
@@ -44,6 +49,7 @@ const createHeader = ({ title, header: { logo, menu, social } }) => {
     menuBtn.addEventListener("click", () => {
       menuBtn.classList.toggle("menu-button-active");
       wrapper.classList.toggle("header-active");
+      document.body.classList.toggle("lock");
     });
     container.append(menuBtn);
   }
@@ -201,7 +207,7 @@ const createMain = ({
           slidesPerView: 1,
           spaceBetween: 20,
         },
-        541: {
+        769: {
           slidesPerView: 2,
           spaceBetween: 40,
         },
@@ -386,13 +392,19 @@ const movieConstructor = (selector, options) => {
   }
 
   app.style.background = options.background ? options.background : "";
+  app.style.backgroundSize = options.backgroundSize
+    ? options.backgroundSize
+    : "";
 
   document.title = options.title;
 
   app.style.color = options.fontColor || "";
-  app.style.backgroundColor = options.backgroundColor || "";
 
   document.documentElement.style.setProperty("--sub-color", options.subColor);
+  document.documentElement.style.setProperty(
+    "--background-color",
+    options.backgroundColor
+  );
 
   if (options.header) {
     app.append(createHeader(options));
@@ -423,11 +435,13 @@ getData()
       background: window.matchMedia("(max-width: 768px)").matches
         ? `linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('https://image.tmdb.org/t/p/original/${images.backdrops[5].file_path}') top right 20% no-repeat`
         : `linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('https://image.tmdb.org/t/p/original/${images.backdrops[5].file_path}') top right no-repeat`,
+      backgroundSize: "cover",
       favicon: "img/logo.png",
       fontColor: "#fff",
       backgroundColor: "#141218",
       subColor: "#9D2929",
       header: {
+        background: "#141218",
         logo: `https://image.tmdb.org/t/p/original/${images.logos[2].file_path}`,
         social: [
           {

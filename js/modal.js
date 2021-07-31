@@ -4,6 +4,8 @@ const openModal = (e) => {
     const modalName = target.getAttribute("href").replace("#", "");
     const targetModal = document.querySelector(`#${modalName}`);
     targetModal.classList.add("is-open");
+    const body = e.target.closest("body");
+    disableScroll(body);
     e.preventDefault();
   }
 };
@@ -17,6 +19,8 @@ const closeModal = (e) => {
     const modalName = target.getAttribute("id");
     const targetModal = document.querySelector(`#${modalName}`);
     targetModal.classList.remove("is-open");
+    const body = e.target.closest("body");
+    enableScroll(body);
     e.preventDefault();
   }
 };
