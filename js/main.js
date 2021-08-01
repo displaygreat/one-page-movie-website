@@ -49,7 +49,11 @@ const createHeader = ({
     menuBtn.addEventListener("click", () => {
       menuBtn.classList.toggle("menu-button-active");
       wrapper.classList.toggle("header-active");
-      document.body.classList.toggle("lock");
+      if (wrapper.classList.contains("header-active")) {
+        disableScroll(document.body);
+      } else {
+        enableScroll(document.body);
+      }
     });
     container.append(menuBtn);
   }

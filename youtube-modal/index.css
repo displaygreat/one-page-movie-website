@@ -41,7 +41,6 @@
 	right: 15px;
 	top: 15px;
 	padding: 3px 13px;
-	z-index: 997;
 	font-size: 25px;
 	text-shadow: 0 0 10px #fff;
 	border-radius: 3px;
@@ -50,6 +49,7 @@
 	-o-transition-duration: 0.1s;
 	-moz-transition-duration: 0.1s;
 	transition-duration: 0.1s;
+	z-index: 1000;
 }
 #youtube-modal-close:hover {
 	background: #333;

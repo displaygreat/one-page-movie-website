@@ -1,46 +1,42 @@
-const disableScroll = (bodyTag) => {
-  const scrollWidth = window.innerWidth - bodyTag.offsetWidth;
+const disableScroll = (bodyElem) => {
+  const scrollWidth = window.innerWidth - bodyElem.offsetWidth;
+  bodyElem.dataset.scrollY = window.scrollY;
 
-  bodyTag.dataset.scrollY = window.scrollY;
-
-  bodyTag.style.cssText = `
+  bodyElem.style.cssText = `
     overflow: hidden;
     position: fixed;
     top: -${window.scrollY}px;
     left: 0;
     padding-right: ${scrollWidth}px;
     width: 100%;
+    height: 100%;
   `;
 
-  const bodyChildren = bodyTag.children;
+  const appElem = bodyElem.firstElementChild;
 
-  for (let i = 0; i < bodyChildren.length; i++) {
-    let appChildren = bodyChildren[i].children;
+  const appChildren = appElem.children;
 
-    for (let j = 0; j < appChildren.length; j++) {
-      if (appChildren[j].classList.contains("lock-padding")) {
-        appChildren[j].style.paddingRight = `${scrollWidth}px`;
-      }
+  for (let i = 0; i < appChildren.length; i++) {
+    if (appChildren[i].classList.contains("lock-padding")) {
+      appChildren[i].style.paddingRight = `${scrollWidth}px`;
     }
   }
 };
 
-const enableScroll = (bodyTag) => {
-  bodyTag.style.cssText = "";
+const enableScroll = (bodyElem) => {
+  bodyElem.style.cssText = "";
 
-  const bodyChildren = bodyTag.children;
+  const appElem = bodyElem.firstElementChild;
 
-  for (let i = 0; i < bodyChildren.length; i++) {
-    let appChildren = bodyChildren[i].children;
+  const appChildren = appElem.children;
 
-    for (let j = 0; j < appChildren.length; j++) {
-      if (appChildren[j].classList.contains("lock-padding")) {
-        appChildren[j].style.paddingRight = "0px";
-      }
+  for (let i = 0; i < appChildren.length; i++) {
+    if (appChildren[i].classList.contains("lock-padding")) {
+      appChildren[i].style.paddingRight = "0px";
     }
   }
 
   window.scroll({
-    top: bodyTag.dataset.scrollY,
+    top: bodyElem.dataset.scrollY,
   });
 };

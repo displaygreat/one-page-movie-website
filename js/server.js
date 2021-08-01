@@ -1,11 +1,12 @@
 const key = config.API_KEY;
+const movieId = "87739";
 
 const getData = async () => {
-  const urlInfo = `https://api.themoviedb.org/3/tv/87739?api_key=${key}`;
-  const urlImages = `https://api.themoviedb.org/3/tv/87739/images?api_key=${key}`;
-  const urlVideo = `https://api.themoviedb.org/3/tv/87739/videos?api_key=${key}`;
-  const urlEpisodes = `https://api.themoviedb.org/3/tv/87739/season/1?api_key=${key}`;
-  const urlCast = `https://api.themoviedb.org/3/tv/87739/aggregate_credits?api_key=${key}`;
+  const urlInfo = `https://api.themoviedb.org/3/tv/${movieId}?api_key=${key}`;
+  const urlImages = `https://api.themoviedb.org/3/tv/${movieId}/images?api_key=${key}`;
+  const urlVideo = `https://api.themoviedb.org/3/tv/${movieId}/videos?api_key=${key}`;
+  const urlEpisodes = `https://api.themoviedb.org/3/tv/${movieId}/season/1?api_key=${key}`;
+  const urlCast = `https://api.themoviedb.org/3/tv/${movieId}/aggregate_credits?api_key=${key}`;
 
   const [
     infoResponse,
