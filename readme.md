@@ -31,3 +31,19 @@ Used
 https://displaygreat.github.io/one-page-movie-website/
 
 [![Click-Eat-HTML-CSS-JS](https://github.com/displaygreat/displaygreat/blob/main/one-page-movie-website.gif)](https://youtu.be/NgrIINgvGmg)
+
+## Usage
+
+Build one page movie website for your favorite TV Series!
+
+Uncomment one of the lines(7-11) in server.js to build page for different movie.
+
+Or asign your favorite movie id to const movie in server.js, line 12.
+
+Find TV Series Id via link:
+
+https://api.themoviedb.org/3/search/multi?api_key=<<your-api-key>>&query=<<tv-series-name>>
+
+Official TMDB API Documentation:
+
+https://developers.themoviedb.org/3/getting-started/introduction
