@@ -7,7 +7,8 @@ export const openModal = (e) => {
     const targetModal = document.querySelector(`#${modalName}`);
     targetModal.classList.add("is-open");
     const body = e.target.closest("body");
-    disableScroll(body);
+    let isActive = false;
+    disableScroll(body, isActive);
     e.preventDefault();
   }
 };

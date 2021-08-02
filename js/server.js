@@ -9,7 +9,7 @@ const movieId = "87739"; //The Queen's Gambit
 // const movieId = "82596"; //Emily in Paris
 // const movieId = "70785"; //Anne with an E
 // const movieId = "77169"; //Cobra Kai
-// const movieId = "<your-favourite-movie-id>"";
+// const movieId = "<your-favourite-movie-id>";
 
 export const getData = async () => {
   const urlInfo = `https://api.themoviedb.org/3/tv/${movieId}?api_key=${key}`;

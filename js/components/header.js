@@ -34,11 +34,14 @@ export const createHeader = ({
 
     const menuBtn = getElement("button", ["menu-button"]);
     menuBtn.addEventListener("click", () => {
+      let isActive;
       menuBtn.classList.toggle("menu-button-active");
       wrapper.classList.toggle("header-active");
       if (wrapper.classList.contains("header-active")) {
-        disableScroll(document.body);
+        isActive = true;
+        disableScroll(document.body, isActive);
       } else {
+        isActive = false;
         enableScroll(document.body);
       }
     });
