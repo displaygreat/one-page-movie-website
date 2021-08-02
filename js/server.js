@@ -1,7 +1,9 @@
+import { config } from "./config.js";
+
 const key = config.API_KEY;
 const movieId = "87739";
 
-const getData = async () => {
+export const getData = async () => {
   const urlInfo = `https://api.themoviedb.org/3/tv/${movieId}?api_key=${key}`;
   const urlImages = `https://api.themoviedb.org/3/tv/${movieId}/images?api_key=${key}`;
   const urlVideo = `https://api.themoviedb.org/3/tv/${movieId}/videos?api_key=${key}`;

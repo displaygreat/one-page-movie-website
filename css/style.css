@@ -235,7 +235,7 @@ header {
 
 .card {
     position: relative;
-    margin-right: 30px;
+    margin: 0 30px 0 0;
     width: 164px;
     height: 113.41px;
     border-radius: 8px;

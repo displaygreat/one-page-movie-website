@@ -1,4 +1,6 @@
-const openModal = (e) => {
+import { disableScroll, enableScroll } from "./blockScroll.js";
+
+export const openModal = (e) => {
   if (e.target.classList.contains("menu-link")) {
     const target = e.target;
     const modalName = target.getAttribute("href").replace("#", "");
@@ -10,7 +12,7 @@ const openModal = (e) => {
   }
 };
 
-const closeModal = (e) => {
+export const closeModal = (e) => {
   if (
     e.target.classList.contains("close-btn") ||
     (!e.target.closest(".modal-dialog") && e.target.closest(".modal"))
@@ -25,5 +27,5 @@ const closeModal = (e) => {
   }
 };
 
-document.addEventListener("click", openModal);
-document.addEventListener("click", closeModal);
+// document.addEventListener("click", openModal);
+// document.addEventListener("click", closeModal);

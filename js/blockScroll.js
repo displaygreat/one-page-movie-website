@@ -1,4 +1,4 @@
-const disableScroll = (bodyElem) => {
+export const disableScroll = (bodyElem) => {
   const scrollWidth = window.innerWidth - bodyElem.offsetWidth;
   bodyElem.dataset.scrollY = window.scrollY;
 
@@ -23,7 +23,7 @@ const disableScroll = (bodyElem) => {
   }
 };
 
-const enableScroll = (bodyElem) => {
+export const enableScroll = (bodyElem) => {
   bodyElem.style.cssText = "";
 
   const appElem = bodyElem.firstElementChild;
