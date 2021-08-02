@@ -24,6 +24,7 @@ Used
 - swiper.js for slider
 - animate.css
 - autoprefixer
+- JavaScript modules
 
 ## Demo
 
