@@ -9,7 +9,7 @@ export const disableScroll = (bodyElem) => {
     left: 0;
     padding-right: ${scrollWidth}px;
     width: 100%;
-    height: 100%;
+    height: 100vh + ${window.scrollY}px;
   `;
 
   const appElem = bodyElem.firstElementChild;
