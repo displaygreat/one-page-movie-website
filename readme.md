@@ -42,7 +42,7 @@ Or asign your favorite movie id to const movie in server.js, line 12.
 
 Find TV Series Id via link:
 
-https://api.themoviedb.org/3/search/multi?api_key=<<your-api-key>>&query=<<tv-series-name>>
+https://api.themoviedb.org/3/search/multi?api_key={your-api-key}&query={tv-series-name}
 
 Official TMDB API Documentation:
 
