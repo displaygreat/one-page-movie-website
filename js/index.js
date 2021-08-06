@@ -6,10 +6,10 @@ getData()
   .then(([info, images, video, episodes, cast]) => {
     const movie = {
       title: info.name || "Movie Title",
-      background: images.backdrops[5]
+      background: images.backdrops[3]
         ? window.matchMedia("(max-width: 768px)").matches
-          ? `linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('https://image.tmdb.org/t/p/original/${images.backdrops[5].file_path}') top right 20% no-repeat`
-          : `linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('https://image.tmdb.org/t/p/original/${images.backdrops[5].file_path}') top right no-repeat`
+          ? `linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('https://image.tmdb.org/t/p/original/${images.backdrops[3].file_path}') top right 20% no-repeat`
+          : `linear-gradient(40deg, rgba(20, 18, 24, 1) 0%, rgba(20, 18, 24, 0.9) 50%, rgba(255,255,255,0) 100%), url('https://image.tmdb.org/t/p/original/${images.backdrops[3].file_path}') top right no-repeat`
         : "",
       backgroundSize: "cover",
       favicon: "img/logo.png",
